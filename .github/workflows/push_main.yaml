@@ -6,7 +6,6 @@ on:
 #      - main
     paths:
       - "rockcraft.yaml"
-      - "files/**"
       - ".github/workflows/**.yaml"
 
 jobs:
@@ -14,4 +13,5 @@ jobs:
     uses: ./.github/workflows/build.yaml
 
   publish:
+    needs: build
     uses: ./.github/workflows/publish.yaml
