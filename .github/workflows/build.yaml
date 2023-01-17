@@ -5,15 +5,15 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Setup LXD
-        uses: whywaita/setup-lxd@v1
+        uses: canonical/setup-lxd@90d7610
         with:
-          lxd_version: latest/stable
+          channel: 5.10/stable
 
       - name: Install rockcraft
         run: |
