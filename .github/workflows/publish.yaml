@@ -1,21 +1,13 @@
-name: Push (main)
+name: Publish
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - "rockcraft.yaml"
-      - "files/**"
-      - ".github/workflows/**.yaml"
+  workflow_call:
 
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: lego
 
 jobs:
-  build:
-    uses: ./.github/workflows/build.yaml
 
   publish:
     needs: build

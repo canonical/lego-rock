@@ -1,0 +1,17 @@
+name: Push (main)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "rockcraft.yaml"
+      - "files/**"
+      - ".github/workflows/**.yaml"
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yaml
+
+  publish:
+    uses: ./.github/workflows/publish.yaml
