@@ -5,6 +5,6 @@ Distroless OCI image for [lego](https://go-acme.github.io/lego/) built with [roc
 ## Example usage
 
 ```bash
-docker pull ghcr.io/canonical/lego:4.9.0
-docker run ghcr.io/canonical/lego:4.9.0 lego -d <your domain> -m <your email> --dns=<your dns provider> --accept-tos=true run
+docker pull ghcr.io/canonical/lego:4.9.1
+docker run ghcr.io/canonical/lego:4.9.1 lego -d <your domain> -m <your email> --dns=<your dns provider> --accept-tos=true run
 ```
