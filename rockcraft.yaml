@@ -9,10 +9,7 @@ build-base: ubuntu:22.04
 platforms:
   amd64:
 
-cmd: ["lego"]
-
 parts:
-
   lego:
     plugin: go
     source: https://github.com/go-acme/lego

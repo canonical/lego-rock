@@ -13,7 +13,7 @@ jobs:
       - name: Setup LXD
         uses: canonical/setup-lxd@v0.1.1
         with:
-          channel: 5.10/stable
+          channel: 5.16/stable
 
       - name: Install rockcraft
         run: |
