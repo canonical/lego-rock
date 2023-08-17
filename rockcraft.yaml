@@ -9,7 +9,11 @@ build-base: ubuntu:22.04
 platforms:
   amd64:
 
-cmd: ["lego"]
+services:
+  lego:
+    override: replace
+    startup: enabled
+    command: lego
 
 parts:
 
