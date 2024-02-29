@@ -2,7 +2,7 @@ name: lego
 summary: Let's Encrypt Rock
 description: |
   Let's Encrypt Rock
-version: "4.14.2"
+version: "4.15.0"
 license: Apache-2.0
 base: bare
 build-base: ubuntu@22.04
@@ -15,9 +15,9 @@ parts:
     plugin: go
     source: https://github.com/go-acme/lego
     source-type: git
-    source-tag: v4.14.2
+    source-tag: v4.15.0
     build-snaps:
-      - go
+      - go/1.21/stable
     stage-packages:
       - libc6_libs
       - ca-certificates_data
