@@ -14,16 +14,41 @@ concurrency:
     group: ${{ github.ref == 'refs/heads/main' && format('ignore-main-{0}', github.run_id) || format('{0}-{1}', github.workflow, github.ref_name) }}
     cancel-in-progress: true
 
+permissions:
+  contents: read
+  packages: write
+  security-events: write
+
 jobs:
 
   build:
-    uses: canonical/identity-credentials-workflows/.github/workflows/build-rock.yaml@v0
+    strategy:
+      matrix:
+        arch:
+          - arch: amd64
+            runner: ubuntu-24.04
+          - arch: arm64
+            runner: [self-hosted, linux, ARM64, medium, jammy]
+    uses: canonical/identity-credentials-workflows/.github/workflows/rock-build.yaml@v3.1.3
+    with:
+      path: .
+      arch: ${{ matrix.arch.arch }}
+      runner: ${{ toJson(matrix.arch.runner) }}
 
   scan:
     needs: build
-    uses: canonical/identity-credentials-workflows/.github/workflows/scan-rock.yaml@v0
+    strategy:
+      matrix:
+        arch: [amd64, arm64]
+    uses: canonical/identity-credentials-workflows/.github/workflows/rock-scan.yaml@v3.1.3
+    with:
+      artifacts-key: ${{ github.sha }}-build-${{ matrix.arch }}
+      arch: ${{ matrix.arch }}
 
   publish:
     if: github.ref_name == 'main'
     needs: [scan, build]
-    uses: canonical/identity-credentials-workflows/.github/workflows/publish-rock.yaml@v0
+    uses: canonical/identity-credentials-workflows/.github/workflows/rock-publish.yaml@v3.1.3
+    with:
+      artifacts-key: ${{ github.sha }}-build-*
+      architectures: '["amd64", "arm64"]'
