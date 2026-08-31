@@ -29,7 +29,7 @@ jobs:
             runner: ubuntu-24.04
           - arch: arm64
             runner: [self-hosted, linux, ARM64, medium, jammy]
-    uses: canonical/identity-credentials-workflows/.github/workflows/rock-build.yaml@v3.1.3
+    uses: canonical/identity-credentials-workflows/.github/workflows/rock-build.yaml@v3.1.4
     with:
       path: .
       arch: ${{ matrix.arch.arch }}
@@ -40,7 +40,7 @@ jobs:
     strategy:
       matrix:
         arch: [amd64, arm64]
-    uses: canonical/identity-credentials-workflows/.github/workflows/rock-scan.yaml@v3.1.3
+    uses: canonical/identity-credentials-workflows/.github/workflows/rock-scan.yaml@v3.1.4
     with:
       artifacts-key: ${{ github.sha }}-build-${{ matrix.arch }}
       arch: ${{ matrix.arch }}
@@ -48,7 +48,7 @@ jobs:
   publish:
     if: github.ref_name == 'main'
     needs: [scan, build]
-    uses: canonical/identity-credentials-workflows/.github/workflows/rock-publish.yaml@v3.1.3
+    uses: canonical/identity-credentials-workflows/.github/workflows/rock-publish.yaml@v3.1.4
     with:
       artifacts-key: ${{ github.sha }}-build-*
       architectures: '["amd64", "arm64"]'
